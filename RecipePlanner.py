@@ -1,11 +1,11 @@
-import Recipes
+import RecipesClass
 import pickle
-from Ingredient_List import getNameList
+import ingredient_list_lol
 
 class RecipePlanner(object):
 
-    def __init__(self): 
-        self.__recipe_list = []
+    def __init__(self, recipe): 
+        self.__recipe_list = [recipe]
         self.getRecipes()
 
     def getRecipeList():
@@ -17,7 +17,7 @@ class RecipePlanner(object):
 
     def makeRecipe(self, name, ingredientsList, timeType, difficulty, instructions):
 
-        recipe = Recipes(name, ingredientsList, timeType, difficulty, instructions)
+        recipe = RecipesClass(name, ingredientsList, timeType, difficulty, instructions)
         recipe.saveRecipe()
 
         return

@@ -1,9 +1,20 @@
 class Ingredient_List:
     def __init__(self):
         self.dict_list = {}
+        
+        
 
     def __str__(self):
         return str(self.dict_list)
+    
+    
+    
+    
+            
+        
+
+    
+    
     
     
     # list of strings with ingredient list
@@ -19,21 +30,46 @@ class Ingredient_List:
         amount = int(amount)
         self.dict_list[name] = [exp, amount]
         
-            
-        #open
-           # write(dictionary) to text file
-        #close
         
+        
+        print("kmpls")
+        try:
+            self.SaveToRepo()
+            print('made it here lol')
+        except:
+            print('no work')
+            
+        
+    
+
+
+    def SaveToRepo(self):
+        print('hello ThErE')
+        """
+        with open('ingred_repository.txt', 'w') as fin:
+            for key in self.dict_list:
+                [curr_exp, curr_amount] = self.dict_list[key]
+                    
+                fin.write(key + "\n")
+                fin.write(curr_exp + '\n')
+                fin.write(curr_amount + '\n')
+        """
+        
+    
+    
+
+
+
+
+
+    
         
     def del_item(self, name_to_delete):
         
         del self.dict_list[name_to_delete]
-        
-            
-        #open
-            #write(dictionary) to text file
-        #close
-        
+        SaveToRepo(self.dict_list)
+                
+                
     def change_amount(self, state_val, key, amount_change):
         """
             For changing the amount of an ingredient
@@ -66,6 +102,8 @@ class Ingredient_List:
         else:
             pass
         
+        SaveToRepo(self.dict_list)
+        
         if warning != '':
             return warning
         
@@ -73,10 +111,6 @@ class Ingredient_List:
         #open
             # print whole dictionary to text file
         #close file
-        
-        
-        
-        
         
         
         

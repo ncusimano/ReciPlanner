@@ -1,3 +1,6 @@
+import os
+
+
 class Recipes(object):
     def __init__(name, ingredientsList, timeType, difficulty, instructions):
     	self.name = name						# string
@@ -21,7 +24,19 @@ class Recipes(object):
 	def getInstructions(self):
 		return self.instructions
 
-	
+	def saveRecipe(self):
+		path = os.getcwd() +"/Recipes" + "/" + self.name + ".txt"
+
+		with open(path, 'w') as f:
+			f.write(self.name +"\n")
+
+			f.write(self.timeType + "\n")
+			f.write(self.difficulty + "\n")
+			f.write(self.instructions)
+
+
+
+
 
 
 

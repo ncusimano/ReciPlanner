@@ -8,66 +8,41 @@ class Ingredient_List:
         return str(self.dict_list)
     
     
-    
-    
-            
-        
-
-    
-    
-    
-    
     # list of strings with ingredient list
     def getNameList(self):
         return list(self.dict_list.keys())
     
     
-    
     def add_item(self, name, exp, amount):
-        #title class with ingred name
+    	#title class with ingred name
         #ingred_name = Ingredient(name, exp, amount)
-        
         amount = int(amount)
+        #print("TEST BOTT")
         self.dict_list[name] = [exp, amount]
-        
-        
-        
-        print("kmpls")
-        try:
-            self.SaveToRepo()
-            print('made it here lol')
-        except:
-            print('no work')
-            
+        self.SaveToRepo()
+     
         
     
 
 
     def SaveToRepo(self):
         print('hello ThErE')
-        """
+        
         with open('ingred_repository.txt', 'w') as fin:
             for key in self.dict_list:
                 [curr_exp, curr_amount] = self.dict_list[key]
                     
                 fin.write(key + "\n")
                 fin.write(curr_exp + '\n')
-                fin.write(curr_amount + '\n')
-        """
+                fin.write(str(curr_amount) + '\n')
         
-    
-    
+        
 
-
-
-
-
-    
         
     def del_item(self, name_to_delete):
         
         del self.dict_list[name_to_delete]
-        SaveToRepo(self.dict_list)
+        self.SaveToRepo()
                 
                 
     def change_amount(self, state_val, key, amount_change):
@@ -102,7 +77,7 @@ class Ingredient_List:
         else:
             pass
         
-        SaveToRepo(self.dict_list)
+        self.SaveToRepo()
         
         if warning != '':
             return warning
@@ -111,6 +86,10 @@ class Ingredient_List:
         #open
             # print whole dictionary to text file
         #close file
-        
+if __name__ == '__main__':
+	a = Ingredient_List()
+	a.add_item("PoTaToEs", "someyhing", 7)
+	a.add_item("ToMaToEs", "datedateee", 90000)
+
         
         

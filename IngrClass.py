@@ -4,14 +4,16 @@ class Ingredient:
 		self.expiry = expiry
 		self.amount = amount
 
+
 	def getName(self):
 		return self.name
 
 	def getExpDate(self):
 		return self.expiry
 
-	def getQuantity(self):
+	def getAmount(self):
 		return self.amount
 
-	def getTable(self):
+	def __str__(self):
 		return self.name, self.expiry, self.amount
+

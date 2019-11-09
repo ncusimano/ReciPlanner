@@ -1,4 +1,4 @@
-class Ingredient_list:
+class Ingredient_List:
     def __init__(self):
         self.dict_list = {}
 
@@ -6,11 +6,17 @@ class Ingredient_list:
         return str(self.dict_list)
     
     
+    # list of strings with ingredient list
+    def getNameList(self):
+        return list(self.dict_list.keys())
+    
     
     
     def add_item(self, name, exp, amount):
-        #current = Ingredient(name, exp, amount)
+        #title class with ingred name
+        #ingred_name = Ingredient(name, exp, amount)
         
+        amount = int(amount)
         self.dict_list[name] = [exp, amount]
         
             
@@ -45,9 +51,9 @@ class Ingredient_list:
             [a, current_amount] = self.dict_list[key]
             new_amount = current_amount - amount_change
             
-            if new_amount < 0:
+            if new_amount <= 0:
                 new_amount = 0
-                warning = 'you are totally out of this, dude'
+                warning = 'you are totally out of ' + str(key) + ', dude'
             
             self.dict_list[key] = [a, new_amount]
             

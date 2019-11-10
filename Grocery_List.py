@@ -7,7 +7,7 @@ class GroceryList:
 		self.gross_list = {}
 
 	def getDict(self):
-    	return self.gross_list
+		return self.gross_list
 
 
 	#VERY IMPORTANT RUN EVERY TIME PROGRAM STARTS
@@ -28,8 +28,8 @@ class GroceryList:
 						reading = False
 		except FileNotFoundError:
 			pass
-    
-    #this method returns a list of items that need to be considered for rebuying
+	
+	#this method returns a list of items that need to be considered for rebuying
 	def checkRefill(self,ingred_num):
 		#later implement automatic adding to grocery list
 		consider_rebuy = []
@@ -55,20 +55,20 @@ class GroceryList:
 		return consider_rebuy
 
 	def addItem(self, itemName, neededAmount):
-	    neededAmount = float(neededAmount)
+		neededAmount = float(neededAmount)
 
-	    if neededAmount != 0:
-	    	self.gross_list[itemName] = neededAmount
-	    	self.SaveToRepo()
+		if neededAmount != 0:
+			self.gross_list[itemName] = neededAmount
+			self.SaveToRepo()
 
 	def SaveToRepo(self):
-	    with open('gross_repository.txt', 'w') as fin:
-	    	for key in self.gross_list:
-	    		curr_amount = self.gross_list[key]
-	    		fin.write(key + "\n")
-	    		fin.write(str(curr_amount) + '\n')
-	        
-     
+		with open('gross_repository.txt', 'w') as fin:
+			for key in self.gross_list:
+				curr_amount = self.gross_list[key]
+				fin.write(key + "\n")
+				fin.write(str(curr_amount) + '\n')
+			
+	 
 '''
 
 if __name__ == '__main__':

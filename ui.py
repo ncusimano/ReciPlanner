@@ -10,6 +10,7 @@ import Grocery_List as GL
 
 import test_ui as tu
 import disp_recipe as dr
+import display_gross_lst as dg
 
 
 pygame.init()
@@ -283,9 +284,27 @@ class list_groceries:
 	biscuits=[]
 	def __init__(self, master):
 		self.master = master
-		pass
+		self.load_biscuits(self.master.scrollpos)
+
+	def load_biscuits(self, num):
+		self.biscuits=[]
+		self.groceries = self.master.grocery_list.checkRefill(self.master.ingredient_list)
+		if num+10>len(self.groceries):
+			num = len(self.groceries)
+		if num < 0:
+			num = 0
+		if len(self.groceries)<10:
+			for i in range(0,len(self.groceries)):
+				self.biscuits.append(biscuit(pygame.Rect(7,71+(num-i)*40,256,32),self.groceries[i], lambda x: None))
+		else:
+			for i in range(num, num+10):
+				self.biscuits.append(biscuit(pygame.Rect(7,71+(num-i)*40,256,32),self.groceries[i], lambda x: None))
+
 	def draw(self):
 		self.master.draw_tab_labels(0)
+		for biscuit in self.biscuits:
+			pygame.draw.rect(self.master.window_Surface, [200,200,200], biscuit.rect)
+			self.master.window_Surface.blit(self.master.list_font.render(biscuit.text, False, colour.DARK), biscuit.rect)
 
 
 #			 #

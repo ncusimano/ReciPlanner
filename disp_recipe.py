@@ -24,7 +24,7 @@ def main(recipe_object):
 
     
     
-    rec_box = pg.Rect(80, 1800, 800, 400)
+    rec_box = pg.Rect(80, 180, 800, 400)
 
 
     

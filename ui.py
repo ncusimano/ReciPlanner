@@ -3,12 +3,27 @@ from math import *
 from pygame.locals import *
 from random import randint
 
+
 pygame.init()
 pygame.font.init()
 
+class NRC:
+	def __init__(self,date,recipes,expires,shopping):
+		self.date = date
+		self.recipes = recipes
+		self.expires = expires
+		self.shopping = shopping
+
+class recipel:
+	def __init__(self,name):
+		self.name = name
+
+y=[NRC([0,0],[recipel("yeet soup"),recipel("chronos"),recipel("bob")],[],False)]
+
+
 class ui:
 	def __init__(self):
-		self.WINDOWWIDTH = 640
+		self.WINDOWWIDTH = 1000
 		self.WINDOWHEIGHT = 640
 		self.window_Surface = pygame.display.set_mode((self.WINDOWWIDTH, self.WINDOWHEIGHT), 0, 32)
 		pygame.display.set_caption('ReciPlanner')
@@ -19,7 +34,7 @@ class ui:
 		self.tabFont = pygame.font.Font(None, 16)
 
 		self.Recipe_Tab = list_recipe(self)
-		self.Calender_Tab = calender(self, ["HALP","ME"])
+		self.Calender_Tab = calender(self, y)
 		self.Ingredients_Tab = list_ingredients(self)
 		self.Groceries_Tab = list_groceries(self)
 
@@ -27,6 +42,7 @@ class ui:
 
 		self.selected_tab = self.Calender_Tab
 		self.tabs[self.selected_tab.number].y += 4
+		self.tab_biscuits = self.Calender_Tab.biscuits
 		
 
 
@@ -45,7 +61,11 @@ class ui:
 				pygame.quit()
 				sys.exit()
 			if event.type == MOUSEBUTTONDOWN:
-				self.tab_select(self, event)
+				self.tab_select(event)
+				self.scroll = scrolltest(event)
+				for biscuit in self.tab_biscuits:
+					if biscuit.rect.collidepoint(event.pos):
+						biscuit.func(self.selected_tab)
 
 
 		#Check Section
@@ -57,19 +77,20 @@ class ui:
 		#print to screen
 		pygame.display.update()
 
-	def tab_select(self, master, event):
+	def tab_select(self, event):
 		for i, j in enumerate(self.tabs):
 			if j.collidepoint(event.pos):
 				self.tabs[self.selected_tab.number].y = 3
 				self.selected_tab = self.tab_list[i]
 				self.tabs[self.selected_tab.number].y += 4
+				self.tab_biscuits = self.selected_tab.biscuits
 				break
 
 	def expired_question(self, list):
 		pass
 
 	def draw_tab_labels(self, num):
-		pygame.draw.rect(self.window_Surface, self.colour_theme, pygame.Rect(3,23,632,612))
+		pygame.draw.rect(self.window_Surface, self.colour_theme, pygame.Rect(3,23,992,612))
 		for i, j in enumerate(["Calender", "Recipes", "Ingredients", "Grocery List"]):
 			pygame.draw.rect(self.window_Surface, self.colour_theme, self.tabs[i])
 			self.window_Surface.blit(self.tabFont.render(j,True,colour.DARK), self.tabs[i])
@@ -90,20 +111,55 @@ class calender:
 	def __init__(self, master, recipe_calender):
 		self.master = master
 		self.recipe_calender = recipe_calender
+		self.day = None
+		self.calender_font = pygame.font.Font(None, 16)
+		self.update_month_biscuits()
 
-	def update_calender(recipe_calender):
+	def update_calender(self, recipe_calender):
 		self.recipe_calender = recipe_calender
+
+	def update_month_biscuits(self):
+		self.biscuits = []
+		day0 = self.recipe_calender[0].date[0]
+		for day in self.recipe_calender:
+			self.biscuits.append(biscuit(pygame.Rect(20+(88*day.date[0]),31+((day.date[1]+day0)//7)*88,72,72),str(day.date[1]+1),self.biscuit_month_wrapper(day.date[1])))
+		self.master.tab_biscuits = self.biscuits
+
+	def update_day_biscuits(self):
+		self.biscuits = []
+		i=0
+		self.biscuits.append(biscuit(pygame.Rect(7,31,64,32),"Back \n yeet", self.biscuit_back_wrapper()))
+		for recipe in self.recipe_calender[self.day].recipes:
+			self.biscuits.append(biscuit(pygame.Rect(7,71+(i*40),256,32),recipe.name, self.biscuit_day_wrapper(recipe)))
+			i+=1
+		self.master.tab_biscuits = self.biscuits
 
 	def draw(self):
 		self.master.draw_tab_labels(0)
+		for biscuit in self.biscuits:
+			pygame.draw.rect(self.master.window_Surface, [200,200,200], biscuit.rect)
+			self.master.window_Surface.blit(self.calender_font.render(biscuit.text, False, colour.DARK), biscuit.rect)
+			
 
-		# if day == 0:
-		# 	row = 0
-		# 	for i in self.recipe_calender:
-		# 		pygame.draw(master.window_Surface, colour.GREY, )
-		# else:
-		# 	for i in self.recipe_calender[day-1]:
-		# 		pass
+	def biscuit_day_wrapper(self,recipe):
+		def func(calender):
+			r = veiw_recipe(recipe)
+			r.run()
+		return func
+
+	def biscuit_month_wrapper(self, number):
+		def func(calender):
+			calender.day=number
+			calender.update_day_biscuits()
+		return func
+
+	def biscuit_back_wrapper(self):
+		def func(calender):
+			calender.day = None
+			calender.update_month_biscuits()
+		return func
+
+
 
 
 class add_recipes: # add recipes to calender
@@ -114,17 +170,23 @@ class add_recipes: # add recipes to calender
 #  RECIPES  #
 #			#
 class veiw_recipe:
-	def __init__(self, recipeObj): #recipeObj should have all the recipe data in it
+	def __init__(self, recipe): #recipeObj should have all the recipe data in it
+		print("works")
+		pass
+	def run(self):
 		pass
 
 class list_recipe:
 	number = 1
+	biscuits = []
 	def __init__(self, master):
 		self.master = master
 		pass
 	def draw(self):
 		self.master.draw_tab_labels(0)
 
+
+#being done by Paola and Noah'
 class add_recipe:
 	def __init__(self,master):
 		pass
@@ -135,6 +197,7 @@ class add_recipe:
 #				#
 class list_ingredients:
 	number = 2
+	biscuits=[]
 	def __init__(self, master):
 		self.master = master
 		pass
@@ -151,6 +214,7 @@ class add_ingredients:
 #
 class list_groceries:
 	number = 3
+	biscuits=[]
 	def __init__(self, master):
 		self.master = master
 		pass

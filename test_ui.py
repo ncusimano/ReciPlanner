@@ -137,13 +137,23 @@ def main(recipe_planner):
     active_submit = False
     
     
+    back_box = pg.Rect(650, 550, 100, 30)
+    back_color = color_inactive
+    
+    
+    
     done = False
     condition_final = False
 
     while not done:
         for event in pg.event.get():
-            if (event.type == pg.QUIT or condition_final == True):
-                done = True
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            
+            #if condition_final == True):
+                #done = True
+            
             if event.type == pg.MOUSEBUTTONDOWN:
                 # If the user clicked on the input_box rect.
                 if input_box.collidepoint(event.pos):
@@ -430,6 +440,12 @@ def main(recipe_planner):
                     done = True
                     condition_final = True
 
+                    
+                elif back_box.collidepoint(event.pos):
+                    return
+
+                    
+                    
                     
                     
                     
@@ -862,6 +878,12 @@ def main(recipe_planner):
         pg.draw.rect(screen, submit_color, submit_box, 2)
         sub = font.render('Submit', True, (30,30,30))
         screen.blit(sub, (submit_box.x+15, submit_box.y+10))
+        
+        
+        pg.draw.rect(screen, back_color, back_box, 2)
+        bck = font.render('Back', True, (30,30,30))
+        screen.blit(bck, (back_box.x+15, back_box.y+10))
+        
 
         pg.display.flip()
         clock.tick(30)

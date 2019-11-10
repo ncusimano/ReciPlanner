@@ -35,6 +35,13 @@ def main():
         text3[n] = ''
         yeehaw2 += 30
 
+
+    break_box = pg.Rect(40, 515, 220, 30)
+    lunch_box = pg.Rect(40, 550, 220, 30)
+    dinn_box = pg.Rect(290, 515, 220, 30)
+    snak_box = pg.Rect(290, 550, 220, 30)
+
+
     
     #input_box3 = pg.Rect(430, 170, 80, 300)
     color_inactive = pg.Color(128,128,128)
@@ -310,6 +317,8 @@ def main():
                 
     
                         q += 1
+                        if q == 9:
+                            condition = False
                 
                 
                 
@@ -584,8 +593,37 @@ def main():
         txt_surface3 = font.render('Amount', True, (30,30,30))
         # Blit the text.
         screen.blit(txt_surface3, (input_box3[0].x+5, input_box3[0].y-18))
+        
+        
+        
+        txt_surface4 = font.render('Time', True, (30,30,30))
+        # Blit the text.
+        screen.blit(txt_surface4, (40, 485))
 
-
+        
+        
+        
+        
+        # buttons for time of meals
+        pg.draw.rect(screen, (128,128,128), break_box, 2)
+        pg.draw.rect(screen, (128,128,128), lunch_box, 2)
+        pg.draw.rect(screen, (128,128,128), dinn_box, 2)
+        pg.draw.rect(screen, (128,128,128), snak_box, 2)
+        
+        # labels for buttons
+        txt_break = font.render('Breakfast', True, (30,30,30))
+        screen.blit(txt_break, (break_box.x+74, break_box.y+10))
+        
+        txt_lunch = font.render('Lunch', True, (30,30,30))
+        screen.blit(txt_lunch, (lunch_box.x+83, lunch_box.y+10))
+        
+        txt_dinner = font.render('Dinner', True, (30,30,30))
+        screen.blit(txt_dinner, (dinn_box.x+83, dinn_box.y+10))
+        
+        txt_snak = font.render('Snack', True, (30,30,30))
+        screen.blit(txt_snak, (snak_box.x+83, snak_box.y+10))
+        
+        
 
 
 

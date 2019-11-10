@@ -17,15 +17,26 @@ def main():
     
     
     
-    input_box2 = [input_box20,input_box21,input_box22,input_box23,input_box24,input_box25,input_box26,input_box27,input_box28,input_box29]
+    input_box2 = []
     
     yeehaw = 0
-    for n in input_box2:
-        n = pg.Rect(40, 170+yeehaw, 375, 300)
-        yeehaw += 31
+    for n in range(10):
+        input_box2.append(pg.Rect(40, 170+yeehaw, 375, 30))
+        yeehaw += 30
+        
+        
+    yeehaw2 = 0
+    input_box3 = {}
+    active3 = {}
+    text3 = {}
+    for n in range(10):
+        input_box3[n] = pg.Rect(420, 170+yeehaw2, 90, 30)
+        active3[n] = False
+        text3[n] = ''
+        yeehaw2 += 30
+
     
-    
-    input_box3 = pg.Rect(430, 170, 80, 300)
+    #input_box3 = pg.Rect(430, 170, 80, 300)
     color_inactive = pg.Color(128,128,128)
     color_active = pg.Color(123, 209, 212)
     color = color_inactive
@@ -56,7 +67,7 @@ def main():
     active29 = False
     
     
-    active3 = False
+    
     text = ''
     
     text20 = ''
@@ -70,8 +81,9 @@ def main():
     text28 = ''
     text29 = ''
     
-    text3 = ''
+    
     done = False
+
 
     while not done:
         for event in pg.event.get():
@@ -92,11 +104,12 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
-                    active3 = False
+                    for z in range(10):
+                        active3[z] = False
                 
                 
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[0].collidepoint(event.pos):
                     # Toggle the active variable.
                     active20 = not active20
                     active21 = False
@@ -108,8 +121,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[1].collidepoint(event.pos):
                     # Toggle the active variable.
                     active21 = not active21
                     active20 = False
@@ -121,8 +137,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[2].collidepoint(event.pos):
                     # Toggle the active variable.
                     active22 = not active22
                     active20 = False
@@ -134,8 +153,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[3].collidepoint(event.pos):
                     # Toggle the active variable.
                     active23 = not active23
                     active20 = False
@@ -147,8 +169,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[4].collidepoint(event.pos):
                     # Toggle the active variable.
                     active24 = not active24
                     active20 = False
@@ -160,8 +185,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[5].collidepoint(event.pos):
                     # Toggle the active variable.
                     active25 = not active25
                     active20 = False
@@ -173,8 +201,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[6].collidepoint(event.pos):
                     # Toggle the active variable.
                     active26 = not active26
                     active20 = False
@@ -186,8 +217,11 @@ def main():
                     active27 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[7].collidepoint(event.pos):
                     # Toggle the active variable.
                     active27 = not active27
                     active20 = False
@@ -199,8 +233,11 @@ def main():
                     active26 = False
                     active28 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[8].collidepoint(event.pos):
                     # Toggle the active variable.
                     active28 = not active28
                     active20 = False
@@ -212,8 +249,11 @@ def main():
                     active26 = False
                     active27 = False
                     active29 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
                 
-                elif input_box2.collidepoint(event.pos):
+                elif input_box2[9].collidepoint(event.pos):
                     # Toggle the active variable.
                     active29 = not active29
                     active20 = False
@@ -225,41 +265,63 @@ def main():
                     active26 = False
                     active27 = False
                     active28 = False
+                    active = False
+                    for z in range(10):
+                        active3[z] = False
 
-                
-                
-                elif input_box3.collidepoint(event.pos):
-                    # Toggle the active variable.
-                    active3 = not active3
-                    active = False
-                    active20 = False
-                    active21 = False
-                    active22 = False
-                    active23 = False
-                    active24 = False
-                    active25 = False
-                    active26 = False
-                    active27 = False
-                    active28 = False
-                    active29 = False
-                
                 else:
-                    active = False
-                    active20 = False
-                    active21 = False
-                    active22 = False
-                    active23 = False
-                    active24 = False
-                    active25 = False
-                    active26 = False
-                    active27 = False
-                    active28 = False
-                    active29 = False
-                    active3 = False
+                    for q in range(10):
+                        if input_box3[q].collidepoint(event.pos):
+                            # Toggle the active variable.
+                            #active3[q] = not active3[q]
+                            active3[q] = True
+                            
+                            print(q)
+                            
+                            active = False
+                            active20 = False
+                            active21 = False
+                            active22 = False
+                            active23 = False
+                            active24 = False
+                            active25 = False
+                            active26 = False
+                            active27 = False
+                            active28 = False
+                            active29 = False
+                        
+                    
+                    
+                        else:
+                            active = False
+                            active20 = False
+                            active21 = False
+                            active22 = False
+                            active23 = False
+                            active24 = False
+                            active25 = False
+                            active26 = False
+                            active27 = False
+                            active28 = False
+                            active29 = False
+                            for z in range(10):
+                                active3[z] = False
+                
+    
+                
+                
+                
+                
+                
+                
                 # Change the current color of the input box.
                 color = color_active if active else color_inactive
-                color2 = color_active2 if active2 else color_inactive2
-                color3 = color_active3 if active3 else color_inactive3
+                color2 = color_active2 if (active20 or active21 or active22 or active23 or active24 or active25 or active26 or active27 or active28 or active29) else color_inactive2
+                color3 = color_active3 if (active3[0] or active3[1] or active3[2] or active3[3] or active3[4] or active3[5] or active3[6] or active3[7] or active3[8] or active3[9]) else color_inactive3
+                
+                print(active3)
+                print(color3)
+                
                 
                 
             if event.type == pg.KEYDOWN:
@@ -339,14 +401,17 @@ def main():
                 
                 
                 
-                elif active3:
-                    if event.key == pg.K_BACKSPACE:
-                        text3 = text3[:-1]
-                    else:
-                        text3 += event.unicode
-                    
-                    
-                    
+                else:
+                    for t in range(10):
+
+                        
+                        if active3[t]:
+                            if event.key == pg.K_BACKSPACE:
+                                text3[t] = text3[t][:-1]
+                            else:
+                                text3[t] += event.unicode
+                            
+                      
                     
                     
 
@@ -448,47 +513,47 @@ def main():
         # Blit the text.
         screen.blit(txt_surface25, (input_box2[5].x+5, input_box2[5].y+5))
         # Blit the input_box rect.      
-        pg.draw.rect(screen, color2, input_box2, 2)
+        pg.draw.rect(screen, color2, input_box2[5], 2)
         
         
         
         #for len(text2)%
-        txt_surface2 = font.render(text2, True, (128,128,128))  
+        txt_surface26 = font.render(text26, True, (128,128,128))  
         
         # Blit the text.
-        screen.blit(txt_surface2, (input_box2.x+5, input_box2.y+5))
+        screen.blit(txt_surface26, (input_box2[6].x+5, input_box2[6].y+5))
         # Blit the input_box rect.      
-        pg.draw.rect(screen, color2, input_box2, 2)
+        pg.draw.rect(screen, color2, input_box2[6], 2)
         
         
         
         #for len(text2)%
-        txt_surface2 = font.render(text2, True, (128,128,128))  
+        txt_surface27 = font.render(text27, True, (128,128,128))  
         
         # Blit the text.
-        screen.blit(txt_surface2, (input_box2.x+5, input_box2.y+5))
+        screen.blit(txt_surface27, (input_box2[7].x+5, input_box2[7].y+5))
         # Blit the input_box rect.      
-        pg.draw.rect(screen, color2, input_box2, 2)
+        pg.draw.rect(screen, color2, input_box2[7], 2)
 
         
         
         #for len(text2)%
-        txt_surface2 = font.render(text2, True, (128,128,128))  
+        txt_surface28 = font.render(text28, True, (128,128,128))  
         
         # Blit the text.
-        screen.blit(txt_surface2, (input_box2.x+5, input_box2.y+5))
+        screen.blit(txt_surface28, (input_box2[8].x+5, input_box2[8].y+5))
         # Blit the input_box rect.      
-        pg.draw.rect(screen, color2, input_box2, 2)
+        pg.draw.rect(screen, color2, input_box2[8], 2)
 
         
         
         #for len(text2)%
-        txt_surface2 = font.render(text2, True, (128,128,128))  
+        txt_surface29 = font.render(text29, True, (128,128,128))  
         
         # Blit the text.
-        screen.blit(txt_surface2, (input_box2.x+5, input_box2.y+5))
+        screen.blit(txt_surface29, (input_box2[9].x+5, input_box2[9].y+5))
         # Blit the input_box rect.      
-        pg.draw.rect(screen, color2, input_box2, 2)
+        pg.draw.rect(screen, color2, input_box2[9], 2)
 
         
         
@@ -501,19 +566,23 @@ def main():
 
 
 
-
-        #for len(text3)%
-        txt_surface3 = font.render(text3, True, (128,128,128))
-        
-        # Blit the text.
-        screen.blit(txt_surface3, (input_box3.x+5, input_box3.y+5))
-        # Blit the input_box rect.
-        pg.draw.rect(screen, color3, input_box3, 2)
-        
+        for u in range(10):
+            #for len(text3)%
+            txt_surface3 = font.render(text3[u], True, (128,128,128))
+            
+            
+            
+            # Blit the text.
+            x1 = input_box3[u].x+5
+            y1 = input_box3[u].y+5
+            screen.blit(txt_surface3, (x1, y1))
+            # Blit the input_box rect.
+            pg.draw.rect(screen, color3, input_box3[u], 2)
+            
         
         txt_surface3 = font.render('Amount', True, (30,30,30))
         # Blit the text.
-        screen.blit(txt_surface3, (input_box3.x+5, input_box3.y-18))
+        screen.blit(txt_surface3, (input_box3[0].x+5, input_box3[0].y-18))
 
 
 

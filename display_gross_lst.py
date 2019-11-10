@@ -32,7 +32,6 @@ def main(gross_object):
     back_color = color_inactive
     
     
-    
     done = False
 
 
@@ -46,9 +45,6 @@ def main(gross_object):
             if event.type == pg.MOUSEBUTTONDOWN:
                 if back_box.collidepoint(event.pos):
                     return
-
-                      
-                    
                     
 
         screen.fill((255,255,255))
@@ -65,7 +61,7 @@ def main(gross_object):
 
         for i in dict_gross:
             
-            whatever = font.render(dict_gross[i], True,  (40,40,40))  
+            whatever = font.render(i, True,  (40,40,40))  
             screen.blit(whatever, (rec_box.x+5, rec_box.y+5+30*i))
             # Blit the input_box rect.      
             pg.draw.rect(screen, color_active, rec_box, 2)

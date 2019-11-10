@@ -1,4 +1,4 @@
-from RecipePlanner import RecipePlanners
+from RecipePlannerClass import RecipePlanner
 import RecipesClass
 
 
@@ -6,7 +6,7 @@ import RecipesClass
 
 if __name__ == "__main__":
 
-	myPlanner = RecipePlanners
+	myPlanner = RecipePlanner()
 	myPlanner.getRecipes()	
 	
 

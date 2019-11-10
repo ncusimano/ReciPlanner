@@ -2,6 +2,7 @@ import os
 
 
 class Recipes:
+    
     def __init__(self, name, ingNames, ingAmounts, timeType, difficulty, instructions):
         self.name = name
         self.ingNames = ingNames

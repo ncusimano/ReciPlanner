@@ -6,6 +6,10 @@ class GroceryList:
 	def __init__(self):
 		self.gross_list = {}
 
+	def getDict(self):
+    	return self.gross_list
+
+
 	#VERY IMPORTANT RUN EVERY TIME PROGRAM STARTS
 	def recreateGross(self):
 		try:

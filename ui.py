@@ -1,24 +1,29 @@
-import pygame, sys, time
+import pygame, sys, time, calendar as cal
 from math import *
 from pygame.locals import *
 from random import randint
+
+import Calendar as ca
+import RecipePlannerClass as RP
+import ingredient_list_lol as il
+import Grocery_List as GL
 
 
 pygame.init()
 pygame.font.init()
 
-class NRC:
-	def __init__(self,date,recipes,expires,shopping):
-		self.date = date
-		self.recipes = recipes
-		self.expires = expires
-		self.shopping = shopping
+# class NRC:
+# 	def __init__(self,date,recipes,expires,shopping):
+# 		self.date = date
+# 		self.recipes = recipes
+# 		self.expires = expires
+# 		self.shopping = shopping
 
-class recipel:
-	def __init__(self,name):
-		self.name = name
+# class recipel:
+# 	def __init__(self,name):
+# 		self.name = name
 
-y=[NRC([0,0],[recipel("yeet soup"),recipel("chronos"),recipel("bob")],[],False)]
+# y=[NRC([0,0],[recipel("yeet soup"),recipel("chronos"),recipel("bob")],[],False)]
 
 
 class ui:
@@ -33,8 +38,27 @@ class ui:
 		self.tabs = [pygame.Rect(3,3,80,16),pygame.Rect(87,3,80,16),pygame.Rect(171,3,80,16),pygame.Rect(255,3,80,16)]
 		self.tabFont = pygame.font.Font(None, 16)
 
+
+
+		self.recipe_planner = RP.RecipePlanner()
+		self.ingredient_list = il.Ingredient_List()
+		self.grocery_list = GL.GroceryList()
+
+		self. grocery_list.recreateGross()
+
+		self.food_calender = ca.FoodCalendar(self.recipe_planner.getRecipeList(),self.ingredient_list,self.grocery_list)
+
+		self.food_calender.loadDays()
+
+		for i in range(1,11):
+		 	self.food_calender.makeDay([i,(i+3)%7,12,2005],[],[],True if i%7==0 else False)
+
+		self.food_calender.loadDays()
+
+
+
 		self.Recipe_Tab = list_recipe(self)
-		self.Calender_Tab = calender(self, y)
+		self.Calender_Tab = calender(self)
 		self.Ingredients_Tab = list_ingredients(self)
 		self.Groceries_Tab = list_groceries(self)
 
@@ -108,27 +132,27 @@ class ui:
 #			 #
 class calender:
 	number = 0
-	def __init__(self, master, recipe_calender):
+	def __init__(self, master):
 		self.master = master
-		self.recipe_calender = recipe_calender
+		self.recipe_calender = self.master.food_calender.getSetDays()
 		self.day = None
 		self.calender_font = pygame.font.Font(None, 16)
 		self.update_month_biscuits()
 
-	def update_calender(self, recipe_calender):
-		self.recipe_calender = recipe_calender
+	def update_calender(self):
+		self.recipe_calender = self.master.food_calender.getSetDays()
 
 	def update_month_biscuits(self):
 		self.biscuits = []
-		day0 = self.recipe_calender[0].date[0]
+		day0 = int(self.recipe_calender[0].date[1])-1
 		for day in self.recipe_calender:
-			self.biscuits.append(biscuit(pygame.Rect(20+(88*day.date[0]),31+((day.date[1]+day0)//7)*88,72,72),str(day.date[1]+1),self.biscuit_month_wrapper(day.date[1])))
+			self.biscuits.append(biscuit(pygame.Rect(20+(88*int(day.date[1])),31+((int(day.date[0])+day0)//7)*88,72,72),str(day.date[0]),self.biscuit_month_wrapper(int(day.date[0]))))
 		self.master.tab_biscuits = self.biscuits
 
 	def update_day_biscuits(self):
 		self.biscuits = []
 		i=0
-		self.biscuits.append(biscuit(pygame.Rect(7,31,64,32),"Back \n yeet", self.biscuit_back_wrapper()))
+		self.biscuits.append(biscuit(pygame.Rect(7,31,64,32),"Back", self.biscuit_back_wrapper()))
 		for recipe in self.recipe_calender[self.day].recipes:
 			self.biscuits.append(biscuit(pygame.Rect(7,71+(i*40),256,32),recipe.name, self.biscuit_day_wrapper(recipe)))
 			i+=1

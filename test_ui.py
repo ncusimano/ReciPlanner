@@ -88,6 +88,54 @@ def main():
     text28 = ''
     text29 = ''
     
+    active_butt1 = True
+    active_butt2 = False
+    active_butt3 = False
+    active_butt4 = False
+    
+    col_butt1 = color_active
+    col_butt2 = color_inactive
+    col_butt3 = color_inactive
+    col_butt4 = color_inactive
+    
+    
+    
+    diff_col_butt1 = color_inactive
+    diff_col_butt2 = color_inactive
+    diff_col_butt3 = color_inactive
+    diff_col_butt4 = color_inactive
+    diff_col_butt5 = color_inactive
+    
+    
+    diff_box1 = pg.Rect(650, 120, 30, 30)
+    diff_box2 = pg.Rect(700, 120, 30, 30)
+    diff_box3 = pg.Rect(750, 120, 30, 30)
+    diff_box4 = pg.Rect(800, 120, 30, 30)
+    diff_box5 = pg.Rect(850, 120, 30, 30)
+    
+    
+    
+    active_diff1 = False
+    active_diff2 = False
+    active_diff3 = False
+    active_diff4 = False
+    active_diff5 = False
+    
+    
+    
+    instr_box = pg.Rect(560, 210, 385, 300)
+    instr_color = color_inactive
+    
+    instr_text = ''
+    active_instr = False
+    
+    
+    
+    submit_box = pg.Rect(860, 560, 100, 30)
+    submit_color = color_inactive
+    
+    
+    
     
     done = False
 
@@ -276,6 +324,75 @@ def main():
                     for z in range(10):
                         active3[z] = False
 
+
+
+                elif break_box.collidepoint(event.pos):
+                    active_butt1 = not active_butt1
+                    active_butt2 = False
+                    active_butt3 = False
+                    active_butt4 = False
+
+                elif lunch_box.collidepoint(event.pos):
+                    active_butt1 = False
+                    active_butt2 = not active_butt2
+                    active_butt3 = False
+                    active_butt4 = False
+
+                elif dinn_box.collidepoint(event.pos):
+                    active_butt1 = False
+                    active_butt2 = False
+                    active_butt3 = not active_butt3
+                    active_butt4 = False
+
+                elif snak_box.collidepoint(event.pos):
+                    active_butt1 = False
+                    active_butt2 = False
+                    active_butt3 = False
+                    active_butt4 = not active_butt4
+                    
+                    
+                elif diff_box1.collidepoint(event.pos):
+                    print('yeehaw')
+                    active_diff1 = True
+                    active_diff2 = False
+                    active_diff3 = False
+                    active_diff4 = False
+                    active_diff5 = False
+                    
+                elif diff_box2.collidepoint(event.pos):
+                    active_diff1 = True
+                    active_diff2 = True
+                    active_diff3 = False
+                    active_diff4 = False
+                    active_diff5 = False
+                    
+                elif diff_box3.collidepoint(event.pos):
+                    active_diff1 = True
+                    active_diff2 = True
+                    active_diff3 = True
+                    active_diff4 = False
+                    active_diff5 = False
+                
+                elif diff_box4.collidepoint(event.pos):
+                    active_diff1 = True
+                    active_diff2 = True
+                    active_diff3 = True
+                    active_diff4 = True
+                    active_diff5 = False
+                    
+                elif diff_box5.collidepoint(event.pos):
+                    active_diff1 = True
+                    active_diff2 = True
+                    active_diff3 = True
+                    active_diff4 = True
+                    active_diff5 = True
+
+
+                elif instr_box.collidepoint(event.pos):
+                    active_instr = True
+                    
+
+
                 else:
                     q = 0
                     condition = True
@@ -314,10 +431,11 @@ def main():
                             active29 = False
                             for z in range(10):
                                 active3[z] = False
+                            active_instr = False
                 
     
                         q += 1
-                        if q == 9:
+                        if q == 10:
                             condition = False
                 
                 
@@ -329,8 +447,21 @@ def main():
                 color2 = color_active2 if (active20 or active21 or active22 or active23 or active24 or active25 or active26 or active27 or active28 or active29) else color_inactive2
                 color3 = color_active3 if (active3[0] or active3[1] or active3[2] or active3[3] or active3[4] or active3[5] or active3[6] or active3[7] or active3[8] or active3[9]) else color_inactive3
                 
-                print(active3)
-                print(color3)
+                col_butt1 = color_active if active_butt1 else color_inactive
+                col_butt2 = color_active if active_butt2 else color_inactive
+                col_butt3 = color_active if active_butt3 else color_inactive
+                col_butt4 = color_active if active_butt4 else color_inactive
+                
+                diff_col_butt1 = color_active if active_diff1 else color_inactive
+                diff_col_butt2 = color_active if active_diff2 else color_inactive
+                diff_col_butt3 = color_active if active_diff3 else color_inactive
+                diff_col_butt4 = color_active if active_diff4 else color_inactive
+                diff_col_butt5 = color_active if active_diff5 else color_inactive
+                
+                instr_color = color_active if active_instr else color_inactive
+                
+                #print(active3)
+                #print(color3)
                 
                 
                 
@@ -405,6 +536,12 @@ def main():
                         text29 = text29[:-1]
                     else:
                         text29 += event.unicode
+                
+                elif active_instr:
+                    if event.key == pg.K_BACKSPACE:
+                        instr_text = instr_text[:-1]
+                    else:
+                        instr_text += event.unicode
                 
                 
                 
@@ -605,10 +742,10 @@ def main():
         
         
         # buttons for time of meals
-        pg.draw.rect(screen, (128,128,128), break_box, 2)
-        pg.draw.rect(screen, (128,128,128), lunch_box, 2)
-        pg.draw.rect(screen, (128,128,128), dinn_box, 2)
-        pg.draw.rect(screen, (128,128,128), snak_box, 2)
+        pg.draw.rect(screen, col_butt1, break_box, 2)
+        pg.draw.rect(screen, col_butt2, lunch_box, 2)
+        pg.draw.rect(screen, col_butt3, dinn_box, 2)
+        pg.draw.rect(screen, col_butt4, snak_box, 2)
         
         # labels for buttons
         txt_break = font.render('Breakfast', True, (30,30,30))
@@ -623,8 +760,35 @@ def main():
         txt_snak = font.render('Snack', True, (30,30,30))
         screen.blit(txt_snak, (snak_box.x+83, snak_box.y+10))
         
-        
+    
 
+        diff = font.render('Difficulty', True, (30,30,30))
+        screen.blit(diff, (560,80))
+
+
+
+        # buttons for difficulty
+        pg.draw.rect(screen, diff_col_butt1, diff_box1, 2)
+        pg.draw.rect(screen, diff_col_butt2, diff_box2, 2)
+        pg.draw.rect(screen, diff_col_butt3, diff_box3, 2)
+        pg.draw.rect(screen, diff_col_butt4, diff_box4, 2)
+        pg.draw.rect(screen, diff_col_butt5, diff_box5, 2)
+
+
+        
+        
+        
+        diff = font.render('Instructions', True, (30,30,30))
+        screen.blit(diff, (560,180))
+
+
+        whatever = font.render(instr_text, True, (128,128,128))  
+        screen.blit(whatever, (instr_box.x+5, instr_box.y+5))
+        # Blit the input_box rect.      
+        pg.draw.rect(screen, instr_color, instr_box, 2)
+
+
+        pg.draw.rect(screen, submit_color, submit_box, 2)
 
 
         pg.display.flip()

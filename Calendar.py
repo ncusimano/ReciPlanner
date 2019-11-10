@@ -23,7 +23,7 @@ class FoodCalendar():
 		for file in file_list:
 			with open(path + "/" + file, 'r') as fin:
 				# Splits all entries in the file by type.
-				entries = fin.readlines().split("\n")
+				entries = fin.readlines()
 
 			# Gets the date as a list.
 			date = entries[0].split(',')
@@ -36,9 +36,9 @@ class FoodCalendar():
 			for name in recipe_names:
 				i = 0
 				searching = True
-				while searching and i < len(all_recipes):
-					if name == all_recipes[i].getName():
-						recipes.append(all_recipes[i])
+				while searching and i < len(self.__all_recipes):
+					if name == self.__all_recipes[i].getName():
+						recipes.append(self.__all_recipes[i])
 						searching = False
 					else:
 						i += 1

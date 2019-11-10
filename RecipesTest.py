@@ -7,16 +7,6 @@ import RecipesClass
 if __name__ == "__main__":
 
 	myPlanner = RecipePlanner()
-	myPlanner.getRecipes()	
+	myPlanner.loadRecipes()	
 	
-
-
-
-
-
 	myPlanner.makeRecipe("Noodles", ["Packets", "Water"], [2, 1], "Breakfast", 1, "- Boil water\n- Add packets\n- more liness\n- yay")
-
-	sortedPlanner = myPlanner.sortRecipes("ingredient", "Meat")
-
-	for i in range(len(sortedPlanner)):
-		print(sortedPlanner[i].getName())

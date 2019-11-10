@@ -12,7 +12,7 @@ from random import randint
 def main(recipe_object):
     
     screen = pg.display.set_mode((1000, 640))
-    font = pg.font.Font(None, 24)
+    font = pg.font.Font(None, 28)
     clock = pg.time.Clock()
 
 
@@ -24,7 +24,7 @@ def main(recipe_object):
 
     
     
-    rec_box = pg.Rect(80, 180, 800, 400)
+    rec_box = pg.Rect(80, 180, 800, 350)
 
 
     

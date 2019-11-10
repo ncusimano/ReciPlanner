@@ -7,6 +7,32 @@ class Ingredient_List:
     def __str__(self):
         return str(self.dict_list)
     
+
+    #VERY IMPORTANT RUN EVERY TIME PROGRAM STARTS
+    def recreateDict(self):
+    	try:
+    		with open("ingred_repository.txt", "r") as fin:
+    			reading = True
+
+
+    			while reading:
+    				try:
+    					curr_key = fin.readline().rstrip()
+
+    					if curr_key =="":
+    						raise NameError
+
+    					curr_exp = fin.readline().rstrip()
+    					curr_amount = fin.readline().rstrip()
+
+    					self.dict_list[curr_key] = [curr_exp, curr_amount]
+
+    				except NameError:
+    					reading = False
+
+    	except FileNotFoundError:
+    		pass
+
     
     # list of strings with ingredient list
     def getNameList(self):
@@ -20,9 +46,6 @@ class Ingredient_List:
         #print("TEST BOTT")
         self.dict_list[name] = [exp, amount]
         self.SaveToRepo()
-     
-        
-    
 
 
     def SaveToRepo(self):
@@ -86,11 +109,18 @@ class Ingredient_List:
         #open
             # print whole dictionary to text file
         #close file
-        """
+
+"""
 if __name__ == '__main__':
 	a = Ingredient_List()
+	a.recreateDict()
 	a.add_item("PoTaToEs", "someyhing", 7)
 	a.add_item("ToMaToEs", "datedateee", 90000)
 
-  """      
-        
+
+	print(a)
+
+
+"""
+
+

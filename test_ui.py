@@ -9,7 +9,7 @@ from random import randint
 
 
 
-def main():
+def main(recipe_planner):
     screen = pg.display.set_mode((1000, 640))
     font = pg.font.Font(None, 24)
     clock = pg.time.Clock()
@@ -138,11 +138,11 @@ def main():
     
     
     done = False
-
+    condition_final = False
 
     while not done:
         for event in pg.event.get():
-            if event.type == pg.QUIT:
+            if (event.type == pg.QUIT or condition_final == True):
                 done = True
             if event.type == pg.MOUSEBUTTONDOWN:
                 # If the user clicked on the input_box rect.
@@ -342,24 +342,28 @@ def main():
                     active_butt2 = False
                     active_butt3 = False
                     active_butt4 = False
+                    time = "Breakfast"
 
                 elif lunch_box.collidepoint(event.pos):
                     active_butt1 = False
                     active_butt2 = not active_butt2
                     active_butt3 = False
                     active_butt4 = False
+                    time = "Lunch"
 
                 elif dinn_box.collidepoint(event.pos):
                     active_butt1 = False
                     active_butt2 = False
                     active_butt3 = not active_butt3
                     active_butt4 = False
+                    time = "Dinner"
 
                 elif snak_box.collidepoint(event.pos):
                     active_butt1 = False
                     active_butt2 = False
                     active_butt3 = False
                     active_butt4 = not active_butt4
+                    time = "Snack"
                     
                     
                 elif diff_box1.collidepoint(event.pos):
@@ -370,6 +374,7 @@ def main():
                     active_diff4 = False
                     active_diff5 = False
                     active_instr = False
+                    score = 1
                     
                 elif diff_box2.collidepoint(event.pos):
                     active_diff1 = True
@@ -378,6 +383,7 @@ def main():
                     active_diff4 = False
                     active_diff5 = False
                     active_instr = False
+                    score = 2
                     
                 elif diff_box3.collidepoint(event.pos):
                     active_diff1 = True
@@ -386,6 +392,7 @@ def main():
                     active_diff4 = False
                     active_diff5 = False
                     active_instr = False
+                    score = 3
                 
                 elif diff_box4.collidepoint(event.pos):
                     active_diff1 = True
@@ -394,6 +401,7 @@ def main():
                     active_diff4 = True
                     active_diff5 = False
                     active_instr = False
+                    score = 4
                     
                 elif diff_box5.collidepoint(event.pos):
                     active_diff1 = True
@@ -402,6 +410,7 @@ def main():
                     active_diff4 = True
                     active_diff5 = True
                     active_instr = False
+                    score = 5
 
 
                 elif instr_box.collidepoint(event.pos):
@@ -411,6 +420,28 @@ def main():
                 
                 elif submit_box.collidepoint(event.pos):
                     active_submit = True
+
+
+                    rec_obj = recipe_planner.makeRecipe(text, [text20,text21,text22,text23,text24,text25,text26,text27,text28,text28,text29], [text3[0],text3[1],text3[2],text3[3],text3[4],text3[5],text3[6],text3[7],text3[8],text3[9]], time, score, instr_text)
+
+
+
+
+                    done = True
+                    condition_final = True
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 
 
                 else:
@@ -486,6 +517,26 @@ def main():
                 
                 
             if event.type == pg.KEYDOWN:
+                
+                
+                """
+                elif active_submit:
+                    done = True
+                    condition_final = True
+                    print('done')
+                    exit()
+                    
+                    #
+                    #
+                    #
+                    #
+                    #
+                    #
+                    #
+                """
+                
+                
+                
                 if active:
                     #if event.key == pg.K_RETURN:
                         #print(text)
@@ -562,19 +613,7 @@ def main():
                         instr_text = instr_text[:-1]
                     else:
                         instr_text += event.unicode
-                
-                elif active_submit:
-                    done = True
-                    print('done')
-                    break
-                    
-                    #
-                    #
-                    #
-                    #
-                    #
-                    #
-                    #
+            
                 
                 
                 

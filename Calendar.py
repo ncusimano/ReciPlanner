@@ -12,10 +12,10 @@ class FoodCalendar():
 		self.__all_ingredients = all_ingredients # List of all ingredients from existing Ingredients List obj.
 		self.__grocery_list = grocery_list # Existing Grocery List obj.
 
-	def getSetDates(self):
+	def getSetDays(self):
 		return self.__set_dates
 
-	def loadDates(self):
+	def loadDays(self):
 		path = os.getcwd() + "/CalendarLog"
 
 		file_list = os.listdir(path = path)
@@ -66,14 +66,22 @@ class FoodCalendar():
 		if not os.path.isdir("CalendarLog"):
 			os.mkdir("CalendarLog")
 
-		current_path = os.getcwd() + "\\CalendarLog\\{}.{}.{}.txt".format(day.date[0], day.date[2], day.date[3])
+		current_path = os.getcwd() + "/CalendarLog/{}.{}.{}.txt".format(day.date[0], day.date[2], day.date[3])
 
 		with open(current_path, 'w') as fout:
-			#fout.write(str(day.date()[0]) + ',', str(day.date[1]) + ',' + )
-			pass
 
-	# def makeDay(self)
+			fout.write(str(day.date[0]) + ',' + str(day.date[1]) + ',' +  str(day.date[2]) + ',' + str(day.date[3]) + '\n')
+			for item in day.recipes:
+				fout.write(str(item) + ',')
+			fout.write("\n")
 
+			fout.write(str(day.shopping) + '\n')
+
+	def makeDay(self, date, recipes, expiries, shopping):
+		new_day = Day(date, recipes, expiries, shopping)
+		self.saveDay(new_day)
+
+'''
 if __name__ == "__main__":
 	thingy = Ingredient_List()
 
@@ -85,7 +93,9 @@ if __name__ == "__main__":
 
 	why = FoodCalendar(stuffs.getRecipeList(), thingy.mockIngrList(), die)
 
-	why.loadDates()
+	why.makeDay([10, 4, 6, 2029], ["Pizza", 'Noodles'], [], False)
 
-	print(why.getSetDates())
+	why.loadDays()
 
+	print(why.getSetDays())
+'''

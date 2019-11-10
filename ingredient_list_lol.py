@@ -65,6 +65,7 @@ class Ingredient_List:
             if new_amount <= 0:
                 new_amount = 0
                 warning = 'you are totally out of ' + str(key) + ', dude'
+		#then send prompt to user. ask em if they'd like to fill in.
             
             self.dict_list[key] = [a, new_amount]
             

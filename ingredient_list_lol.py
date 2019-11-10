@@ -116,6 +116,13 @@ class Ingredient_List:
         #open
             # print whole dictionary to text file
         #close file
+        def mockIngrList(self):
+        	a = Ingredient_List()
+        	a.recreateDict()
+        	a.add_item("PoTaToEs", 1, 12, 2019, 7)
+        	a.add_item("ToMaToEs", 12, 12, 2000, 90000)
+
+
 
 '''
 if __name__ == '__main__':

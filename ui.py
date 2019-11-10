@@ -45,10 +45,7 @@ class ui:
 
 		self.food_calender = ca.FoodCalendar(self.recipe_planner.getRecipeList(),self.ingredient_list,self.grocery_list)
 
-		self.food_calender.loadDays()
 
-		for i in range(1,11):
-		 	self.food_calender.makeDay([i,(i+3)%7,12,2005],[],[],True if i%7==0 else False)
 
 		self.food_calender.loadDays()
 
@@ -243,6 +240,7 @@ class list_ingredients:
 	biscuits=[]
 	def __init__(self, master):
 		self.master = master
+		self.master.ingredient_list.recreateDict()
 		self.ingredients = self.master.ingredient_list.getNameList()
 		self.load_biscuits(self.master.scrollpos)
 
@@ -254,10 +252,10 @@ class list_ingredients:
 			num = 0
 		if len(self.ingredients)<10:
 			for i in range(0,len(self.ingredients)):
-				self.biscuits.append(biscuit(pygame.Rect(7,71+(num-i)*40,256,32),self.ingredients[i].name, lambda x: None))
+				self.biscuits.append(biscuit(pygame.Rect(7,71+(num-i)*40,256,32),self.ingredients[i], lambda x: None))
 		else:
 			for i in range(num, num+10):
-				self.biscuits.append(biscuit(pygame.Rect(7,71+(num-i)*40,256,32),self.ingredients[i].name, lambda x: None))
+				self.biscuits.append(biscuit(pygame.Rect(7,71+(num-i)*40,256,32),self.ingredients[i], lambda x: None))
 
 	def new_wrapper(self):
 		def func(parameter):

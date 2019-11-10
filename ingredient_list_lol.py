@@ -30,7 +30,7 @@ class Ingredient_List:
     					curr_year = fin.readline().rstrip()
     					curr_amount = fin.readline().rstrip()
 
-    					self.dict_list[curr_key] = [curr_exp, curr_amount]
+    					self.dict_list[curr_key] = [curr_day, curr_month, curr_year, curr_amount]
 
     				except NameError:
     					reading = False

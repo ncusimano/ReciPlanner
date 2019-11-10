@@ -377,7 +377,6 @@ def main(recipe_planner):
                     
                     
                 elif diff_box1.collidepoint(event.pos):
-                    print('yeehaw')
                     active_diff1 = True
                     active_diff2 = False
                     active_diff3 = False
@@ -468,7 +467,6 @@ def main(recipe_planner):
                             # Toggle the active variable.
                             active3[q] = not active3[q]
                             
-                            print(q)
                             
                             active = False
                             active20 = False

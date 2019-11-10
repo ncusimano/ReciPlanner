@@ -131,10 +131,10 @@ def main():
     
     
     
-    submit_box = pg.Rect(860, 560, 100, 30)
-    submit_color = color_inactive
+    submit_box = pg.Rect(850, 550, 100, 30)
+    submit_color = color_active
     
-    
+    active_submit = False
     
     
     done = False
@@ -161,6 +161,7 @@ def main():
                     active29 = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 
                 
@@ -179,6 +180,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[1].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -195,6 +197,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[2].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -211,6 +214,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[3].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -227,6 +231,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[4].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -243,6 +248,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[5].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -259,6 +265,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[6].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -275,6 +282,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[7].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -291,6 +299,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[8].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -307,6 +316,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
                 
                 elif input_box2[9].collidepoint(event.pos):
                     # Toggle the active variable.
@@ -323,6 +333,7 @@ def main():
                     active = False
                     for z in range(10):
                         active3[z] = False
+                    active_instr = False
 
 
 
@@ -358,6 +369,7 @@ def main():
                     active_diff3 = False
                     active_diff4 = False
                     active_diff5 = False
+                    active_instr = False
                     
                 elif diff_box2.collidepoint(event.pos):
                     active_diff1 = True
@@ -365,6 +377,7 @@ def main():
                     active_diff3 = False
                     active_diff4 = False
                     active_diff5 = False
+                    active_instr = False
                     
                 elif diff_box3.collidepoint(event.pos):
                     active_diff1 = True
@@ -372,6 +385,7 @@ def main():
                     active_diff3 = True
                     active_diff4 = False
                     active_diff5 = False
+                    active_instr = False
                 
                 elif diff_box4.collidepoint(event.pos):
                     active_diff1 = True
@@ -379,6 +393,7 @@ def main():
                     active_diff3 = True
                     active_diff4 = True
                     active_diff5 = False
+                    active_instr = False
                     
                 elif diff_box5.collidepoint(event.pos):
                     active_diff1 = True
@@ -386,12 +401,17 @@ def main():
                     active_diff3 = True
                     active_diff4 = True
                     active_diff5 = True
+                    active_instr = False
 
 
                 elif instr_box.collidepoint(event.pos):
                     active_instr = True
                     
-
+                
+                
+                elif submit_box.collidepoint(event.pos):
+                    active_submit = True
+                
 
                 else:
                     q = 0
@@ -414,7 +434,7 @@ def main():
                             active27 = False
                             active28 = False
                             active29 = False
-                        
+                            active_instr = False
                             condition = False
                     
                         else:
@@ -543,6 +563,18 @@ def main():
                     else:
                         instr_text += event.unicode
                 
+                elif active_submit:
+                    done = True
+                    print('done')
+                    break
+                    
+                    #
+                    #
+                    #
+                    #
+                    #
+                    #
+                    #
                 
                 
                 
@@ -789,7 +821,8 @@ def main():
 
 
         pg.draw.rect(screen, submit_color, submit_box, 2)
-
+        sub = font.render('Submit', True, (30,30,30))
+        screen.blit(sub, (submit_box.x+15, submit_box.y+10))
 
         pg.display.flip()
         clock.tick(30)

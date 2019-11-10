@@ -35,7 +35,23 @@ class RecipePlanner():
 
     def makeRecipe(self, name, ingNames, ingAmounts, timeType, difficulty, instructions):
         recipe_new = Recipes(name, ingNames, ingAmounts, timeType, difficulty, instructions)
+
+        for i in range(len(self.__recipe_list)):
+            if recipe_new.getName() == self.__recipe_list[i].getName():
+                return "That recipe name already exists."
+
         self.saveRecipe(recipe_new)
+
+        self.__recipe_list.append(recipe_new)
+
+    def editRecipe(self, name, ingNames, ingAmounts, timeType, difficulty, instructions, oldRecipeName):
+        recipe_edited = Recipes(name, ingNames, ingAmounts, timeType, difficulty, instructions)
+
+        self.saveRecipe(recipe_edited)
+
+        if not recipe_edited.getName() == oldRecipeName:
+            os.remove(os.getcwd() + "\\Recipes\\" + oldRecipeName +".txt" )
+
 
     def saveRecipe(self, recipe):
         current_path = os.getcwd()
@@ -43,10 +59,9 @@ class RecipePlanner():
         if not os.path.isdir("Recipes"):
             os.mkdir("Recipes")
 
-        current_path += "\\Recipes" + "\\" + recipe.name + ".txt"
+        current_path += "\\Recipes" + "\\" + recipe.getName() + ".txt"
 
         with open(current_path, 'w') as f:
-            
             names_str = ""
             amounts_str = ""
             for i in range(len(recipe.getIngNames())):
@@ -59,6 +74,8 @@ class RecipePlanner():
             f.write(recipe.getTimeType() + "\n")
             f.write(str(recipe.getDifficulty()) + "\n")
             f.write(recipe.getInstructions())
+
+
 
     def sortRecipes(self, filType, filVal):
         sorted_list = []

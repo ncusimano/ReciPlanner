@@ -32,24 +32,16 @@ class RecipePlanner():
 
             recipe_obj = Recipes(recipe[0], recipe[1], recipe[2], recipe[3], recipe[4], recipe[5])
             self.__recipe_list.append(recipe_obj)
-                    
 
     def makeRecipe(self, name, ingNames, ingAmounts, timeType, difficulty, instructions):
         recipe_new = Recipes(name, ingNames, ingAmounts, timeType, difficulty, instructions)
         self.saveRecipe(recipe_new)
 
-    def numSaveLines(self, file):
-        with open(file) as f:
-            for i, l in enumerate(f):
-                pass
-        return i + 1
-
-   # Saves edited or new recipies to their own file in a recipe directory. 
     def saveRecipe(self, recipe):
         current_path = os.getcwd()
 
-        if not os.path.isdir("Recipies"):
-            os.mkdir("Recipies")
+        if not os.path.isdir("Recipes"):
+            os.mkdir("Recipes")
 
         current_path += "\\Recipes" + "\\" + recipe.name + ".txt"
 
@@ -61,10 +53,41 @@ class RecipePlanner():
                 names_str += recipe.getIngNames()[i] + ","
                 amounts_str += str(recipe.getIngAmounts()[i]) + ","
 
-
             f.write(recipe.getName() + "\n")
             f.write(names_str + "\n")
             f.write(amounts_str + "\n")
             f.write(recipe.getTimeType() + "\n")
             f.write(str(recipe.getDifficulty()) + "\n")
             f.write(recipe.getInstructions())
+
+    def sortRecipes(self, filType, filVal):
+        sorted_list = []
+
+        if filType == "timeType":
+
+            for i in range(len(self.__recipe_list)):
+                if self.__recipe_list[i].getTimeType() == filVal + "\n":
+                    sorted_list.append(self.__recipe_list[i])
+
+        elif filType == "difficulty":
+            for i in range(len(self.__recipe_list)):
+                if self.__recipe_list[i].getDifficulty() == str(filVal) + "\n":
+                    sorted_list.append(self.__recipe_list[i])
+
+        else: # sort by ingredient
+            assert filType == "ingredient", "using else but not with ingredient sorting"
+            for i in range(len(self.__recipe_list)):
+                if filVal in self.__recipe_list[i].getIngNames():
+                    sorted_list.append(self.__recipe_list[i])
+
+        return sorted_list
+
+    def numSaveLines(self, file):
+        with open(file) as f:
+            for i, l in enumerate(f):
+                pass
+        return i + 1
+
+
+
+

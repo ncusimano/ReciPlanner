@@ -14,5 +14,4 @@ if __name__ == "__main__":
 
 
 
-	myPlanner.makeRecipe("Noodles", [["Packets", 2], ["Water", 1]], "Breakfast", 1, "- Boil water\n- Add packets")
- 
+	myPlanner.makeRecipe("Noodles", ["Packets", "Water"], [2, 1], "Breakfast", 1, "- Boil water\n- Add packets\n- more liness\n- yay")

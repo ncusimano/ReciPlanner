@@ -3,18 +3,21 @@ import os
 
 class Recipes:
     def __init__(self, name, ingNames, ingAmounts, timeType, difficulty, instructions):
-    	self.name = name						# string
-    	self.ingNames = ingNames
+        self.name = name
+        self.ingNames = ingNames
         self.ingAmounts = ingAmounts
-    	self.timeType = timeType				# string
-    	self.difficulty = difficulty			# integer
-    	self.instructions = instructions		# string
+        self.timeType = timeType
+        self.difficulty = difficulty
+        self.instructions = instructions
 
     def getName(self):
     	return self.name
 
-    def getIngredientsList(self):
-    	return self.ingredientsList
+    def getIngNames(self):
+        return self.ingNames
+
+    def getIngAmounts(self):
+        return self.ingAmounts
 
     def getTimeType(self):
     	return self.timeType

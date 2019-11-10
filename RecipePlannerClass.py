@@ -87,7 +87,9 @@ class RecipePlanner():
             amounts_str = ""
             for i in range(len(recipe.getIngNames())):
                 names_str += recipe.getIngNames()[i] + ","
-                amounts_str += str(recipe.getIngAmounts()[i]) + ","
+                
+            for j in range(len(recipe.getIngAmounts())):
+                amounts_str += str(recipe.getIngAmounts()[j]) + ","
 
             f.write(recipe.getName() + "\n")
             f.write(names_str + "\n")

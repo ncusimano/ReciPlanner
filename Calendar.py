@@ -85,6 +85,18 @@ class FoodCalendar():
 		day.recipes.append(recipe)
 		saveDay(day)
 
+	def removeRecipe(self, day, recipe):
+		for item in day.recipes:
+			if item == recipe:
+				del item
+
+		self.saveDay(day)
+
+	def toggleShopping(self, day):
+		day.shopping = not day.shopping
+
+		self.saveDay(day)
+
 '''
 if __name__ == "__main__":
 	thingy = Ingredient_List()

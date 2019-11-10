@@ -270,11 +270,12 @@ def main():
                         active3[z] = False
 
                 else:
-                    for q in range(10):
+                    q = 0
+                    condition = True
+                    while condition == True:
                         if input_box3[q].collidepoint(event.pos):
                             # Toggle the active variable.
-                            #active3[q] = not active3[q]
-                            active3[q] = True
+                            active3[q] = not active3[q]
                             
                             print(q)
                             
@@ -290,7 +291,7 @@ def main():
                             active28 = False
                             active29 = False
                         
-                    
+                            condition = False
                     
                         else:
                             active = False
@@ -308,7 +309,7 @@ def main():
                                 active3[z] = False
                 
     
-                
+                        q += 1
                 
                 
                 

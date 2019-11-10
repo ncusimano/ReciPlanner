@@ -4,11 +4,10 @@ import RecipesClass
 import ingredient_list_lol
 
 
-class RecipePlanner(object):
+class RecipePlanners:
 
-    def __init__(self, recipe): 
-        self.__recipe_list = [recipe]
-        self.getRecipes()
+    def __init__(self): 
+        self.__recipe_list = []
 
     def getRecipeList():
         return self.__recipe_list

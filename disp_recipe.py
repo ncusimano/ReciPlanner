@@ -57,11 +57,11 @@ def main(recipe_object):
         
         
         
-        diff = font.render(recipe_object.getName, True, (30,30,30))
+        diff = font.render(recipe_object.getName(), True, (30,30,30))
         screen.blit(diff, (40,120))
 
 
-        whatever = font.render(recipe_object.getName, True, (128,128,128))  
+        whatever = font.render(recipe_object.getInstructions(), True, (128,128,128))  
         screen.blit(whatever, (rec_box.x+5, rec_box.y+5))
         # Blit the input_box rect.      
         pg.draw.rect(screen, color_active, rec_box, 2)

@@ -7,6 +7,32 @@ class Ingredient_List:
     def __str__(self):
         return str(self.dict_list)
     
+
+    #VERY IMPORTANT RUN EVERY TIME PROGRAM STARTS
+    def recreateDict(self):
+    	try:
+    		with open("ingred_repository.txt", "r") as fin:
+    			reading = True
+
+
+    			while reading:
+    				try:
+    					curr_key = fin.readline().rstrip()
+
+    					if curr_key =="":
+    						raise NameError
+
+    					curr_exp = fin.readline().rstrip()
+    					curr_amount = fin.readline().rstrip()
+
+    					self.dict_list[curr_key] = [curr_exp, curr_amount]
+
+    				except NameError:
+    					reading = False
+
+    	except FileNotFoundError:
+    		pass
+
     
     # list of strings with ingredient list
     def getNameList(self):
@@ -16,17 +42,14 @@ class Ingredient_List:
     def add_item(self, name, exp, amount):
     	#title class with ingred name
         #ingred_name = Ingredient(name, exp, amount)
-        amount = int(amount)
+        amount = float(amount)
         #print("TEST BOTT")
         self.dict_list[name] = [exp, amount]
         self.SaveToRepo()
-     
-        
-    
 
 
     def SaveToRepo(self):
-        print('hello ThErE')
+        #print('hello ThErE')
         
         with open('ingred_repository.txt', 'w') as fin:
             for key in self.dict_list:
@@ -65,8 +88,7 @@ class Ingredient_List:
             if new_amount <= 0:
                 new_amount = 0
                 warning = 'you are totally out of ' + str(key) + ', dude'
-		#then send prompt to user. ask em if they'd like to fill in.
-            
+
             self.dict_list[key] = [a, new_amount]
             
         elif state_val == 1:
@@ -87,10 +109,18 @@ class Ingredient_List:
         #open
             # print whole dictionary to text file
         #close file
+
+"""
 if __name__ == '__main__':
 	a = Ingredient_List()
+	a.recreateDict()
 	a.add_item("PoTaToEs", "someyhing", 7)
 	a.add_item("ToMaToEs", "datedateee", 90000)
 
-        
-        
+
+	print(a)
+
+
+"""
+
+

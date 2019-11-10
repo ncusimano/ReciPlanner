@@ -6,6 +6,26 @@ class GroceryList:
 	def __init__(self):
 		self.gross_list = {}
 
+	#VERY IMPORTANT RUN EVERY TIME PROGRAM STARTS
+	def recreateGross(self):
+		try:
+			with open("gross_repository.txt", "r") as fin:
+				reading = True
+				while reading:
+					try:
+						curr_key = fin.readline().rstrip()
+
+						if curr_key =="":
+							raise NameError
+
+						curr_amount = fin.readline().rstrip()
+						self.gross_list[curr_key] = curr_amount
+					except NameError:
+						reading = False
+		except FileNotFoundError:
+			pass
+    
+
 	def checkRefill(self, itemName, expiryMonth, quantity):
 		#later implement automatic adding to grocery list
 
@@ -19,8 +39,10 @@ class GroceryList:
 
 	def addItem(self, itemName, neededAmount):
 	    neededAmount = float(neededAmount)
-	    self.gross_list[itemName] = neededAmount
-	    self.SaveToRepo()
+
+	    if neededAmount != 0:
+	    	self.gross_list[itemName] = neededAmount
+	    	self.SaveToRepo()
 
 	def SaveToRepo(self):
 	    with open('gross_repository.txt', 'w') as fin:
@@ -31,12 +53,12 @@ class GroceryList:
 	        
      
 
-'''	
 
 if __name__ == '__main__':
 	a = GroceryList()
-	print(a.checkRefill("hi", "12", 1))
-
+	#print(a.checkRefill("hi", "12", 1))
+	a.recreateGross()
 	a.addItem("smiles", 5)
+	a.addItem("sadness", 4)
 	
-'''
+	

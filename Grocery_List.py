@@ -1,5 +1,5 @@
 #import Calendar
-
+#from ingredient_list_lol import Ingredient_List 
 from datetime import datetime
 
 class GroceryList:
@@ -25,17 +25,21 @@ class GroceryList:
 		except FileNotFoundError:
 			pass
     
-
-	def checkRefill(self, itemName, expiryMonth, quantity):
+    #this method returns a list of items that need to be considered for rebuying
+	def checkRefill(self,ingred_num):
 		#later implement automatic adding to grocery list
+		consider_rebuy = []
+		new_dict = ingred_num.getDict()
 
-		if datetime.now().month == int(expiryMonth):
-			return "Your " + itemName + " has/have expired. Want to refill?"
-			#passed to manager. manager will pass to ui
-		elif float(quantity) == 0:
-			return "You're out of " + itemName + ". Want to refill?"
-		else:
-			return ""
+		for item in new_dict:
+			[new_month, new_amount] = new_dict[item]
+
+			if (datetime.now().month == int(new_month) ) or (float(new_amount) == 0):
+				#return "Your " + itemName + " has/have expired. Want to refill?"
+				consider_rebuy.append(item)
+
+				#passed to manager. manager will pass to ui
+		return consider_rebuy
 
 	def addItem(self, itemName, neededAmount):
 	    neededAmount = float(neededAmount)
@@ -52,13 +56,17 @@ class GroceryList:
 	    		fin.write(str(curr_amount) + '\n')
 	        
      
-
+'''
 
 if __name__ == '__main__':
 	a = GroceryList()
-	#print(a.checkRefill("hi", "12", 1))
-	a.recreateGross()
-	a.addItem("smiles", 5)
-	a.addItem("sadness", 4)
+	pot = Ingredient_List()
+	pot.add_item("PoTaToEs", "12", 1)
+	pot.add_item("ToMaToEs", "20", 00)
+
+	print(a.checkRefill( pot))
+	#a.recreateGross()
+	#a.addItem("smiles", 5)
+	#a.addItem("sadness", 4)
 	
-	
+	'''

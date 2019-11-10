@@ -1,5 +1,5 @@
 #import Calendar
-#from ingredient_list_lol import Ingredient_List 
+from ingredient_list_lol import Ingredient_List 
 from datetime import datetime
 
 class GroceryList:
@@ -32,11 +32,20 @@ class GroceryList:
 		new_dict = ingred_num.getDict()
 
 		for item in new_dict:
-			[new_month, new_amount] = new_dict[item]
-
-			if (datetime.now().month == int(new_month) ) or (float(new_amount) == 0):
-				#return "Your " + itemName + " has/have expired. Want to refill?"
+			[new_day, new_month, new_year, new_amount] = new_dict[item]
+			if (float(new_amount) == 0):
 				consider_rebuy.append(item)
+
+			elif (datetime.now().year > int(new_year)):
+				consider_rebuy.append(item)
+
+			elif int(new_day) == "--":
+				if (datetime.now().day == 1 and datetime.now().month == int(new_month)):
+					consider_rebuy.append(item)
+
+			elif int(new_day) != "--":
+				if datetime.now().day == int(new_day) and datetime.now().month == int(new_month):
+					consider_rebuy.append(item)
 
 				#passed to manager. manager will pass to ui
 		return consider_rebuy
@@ -61,12 +70,13 @@ class GroceryList:
 if __name__ == '__main__':
 	a = GroceryList()
 	pot = Ingredient_List()
-	pot.add_item("PoTaToEs", "12", 1)
-	pot.add_item("ToMaToEs", "20", 00)
+	pot.add_item("PoTaToEs", 1, 12, 2019, 7)
+	pot.add_item("ToMaToEs", 12, 12, 2019, 90000)
+	print(datetime.now().year)
 
-	print(a.checkRefill( pot))
+	print(a.checkRefill(pot))
 	#a.recreateGross()
 	#a.addItem("smiles", 5)
 	#a.addItem("sadness", 4)
+'''	
 	
-	'''

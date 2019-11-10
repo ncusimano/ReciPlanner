@@ -81,7 +81,7 @@ class FoodCalendar():
 		new_day = Day(date, recipes, expiries, shopping)
 		self.saveDay(new_day)
 
-	def addRecipe(self, day. recipe):
+	def addRecipe(self, day, recipe):
 		day.recipes.append(recipe)
 		saveDay(day)
 
